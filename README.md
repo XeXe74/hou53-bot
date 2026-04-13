@@ -25,7 +25,7 @@ Creation date: 12/04/2026
     <br />
   </p>
 
-[![Python](https://img.shields.io/badge/Python-3.14%2B-blue)]
+![Python](https://img.shields.io/badge/Python-3.14%2B-blue)
 ![GitHub License](https://img.shields.io/github/license/Yagouus/hou53-bot)
 ![GitHub Release](https://img.shields.io/github/v/release/Yagouus/hou53-bot)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Yagouus/hou53-bot)
