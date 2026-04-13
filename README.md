@@ -25,6 +25,7 @@ Creation date: 12/04/2026
     <br />
   </p>
 
+![Python](https://img.shields.io/badge/Python-3.14%2B-blue)
 ![GitHub License](https://img.shields.io/github/license/Yagouus/hou53-bot)
 ![GitHub Release](https://img.shields.io/github/v/release/Yagouus/hou53-bot)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Yagouus/hou53-bot)
@@ -106,7 +107,7 @@ This dataset contains 79 explanatory variables describing (almost) every aspect 
 You can get an idea of the dataset and how to process it in [this link](https://inria.github.io/scikit-learn-mooc/python_scripts/datasets_ames_housing.html). And you can learn more about it on it's [original paper](https://jse.amstat.org/v19n3/decock.pdf) and on [Kaggle](https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/data).
 
 >[!NOTE]
-> This dataset is located in the `data` directory. It is stored in a comma separated value (CSV) file `house_prices.txt`. The dataset contains missing values. The character `"?"` is used as a missing value marker. You can find a detailed description of all the variables in the file `data/data_description.txt`.
+> This dataset is located in the `data/raw` directory. It is stored in a comma separated value (CSV) file `house_prices.txt`. The dataset contains missing values. The character `"?"` is used as a missing value marker. You can find a detailed description of all the variables in the file `data/external/data_description.txt`.
 
 The main variables are:
 
@@ -195,6 +196,13 @@ The main variables are:
 
 The table below shows the required technology stack to implement the solution. You should use the following tools to solve the proposed problem, with special emphasis in the use of `uv` and `docker` to be able to run the complete solution without needing to install any aditional dependencies. 
 
+>[!NOTE]
+> The repository already includes the basic `uv` project configuration in `pyproject.toml` and the expected Python version in `.python-version`. To create the same local environment with the same declared packages, run:
+>```bash
+>uv sync
+>```
+<br />
+
 | Technology | Description & Use |
 |-----------|------------------|
 | **uv** | Fast Python package manager and environment tool to manage dependencies and virtual environments efficiently. |
@@ -208,7 +216,7 @@ The table below shows the required technology stack to implement the solution. Y
 | **SHAP / Feature Importance tools** | Used to provide explainability by highlighting which features influence predictions. |
 | **PostgreSQL / SQLite (optional)** | Database to store predictions, user inputs, logs, or model metadata. |
 | **GitHub Actions (optional)** | CI/CD tool to automate testing, building, and deployment of the project. |
- **AI assistants (Codex, Claude Code, Copilot, etc.)** | The use of AI tools is encouraged. Feel free to use any tool to help you build your solution as long as you understand what you are implementing.
+| **AI assistants (Codex, Claude Code, Copilot, etc.)** | The use of AI tools is encouraged. Feel free to use any tool to help you build your solution as long as you understand what you are implementing. |
 
 # ✅ Evaluation criteria
 
