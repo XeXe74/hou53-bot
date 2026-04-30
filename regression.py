@@ -1,3 +1,29 @@
+"""
+regression.py
+
+Training pipeline for HOU53-bot's house price prediction model.
+Loads the preprocessed dataset, trains multiple regression models with
+hyperparameter tuning via GridSearchCV, selects the best by RMSE on the
+held-out test set, and saves it to disk for use by the inference API.
+
+Models evaluated:
+    - Decision Tree
+    - Ridge
+    - Lasso
+    - SVR
+    - Random Forest
+    - Gradient Boosting
+
+The target variable (SalePrice) is stored in log1p scale in the CSV.
+Predictions are transformed back with expm1 before computing metrics
+so all reported values are in real USD.
+
+Output:
+    data/processed/best_model.pkl          — serialised sklearn Pipeline
+    data/processed/predicted_vs_actual.png — scatter plot of predictions
+"""
+
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -12,11 +38,11 @@ from sklearn.linear_model import Ridge, Lasso
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 
 # Config
-DATA         = "data/processed/house_prices_preprocessed.csv"
-MODEL_FILE   = "data/processed/best_model.pkl"
-TEST_SPLIT   = 0.2
+DATA = "data/processed/house_prices_preprocessed.csv"
+MODEL_FILE = "data/processed/best_model.pkl"
+TEST_SPLIT = 0.2
 RANDOM_STATE = 42
-CV_FOLDS     = 5
+CV_FOLDS = 5
 
 # Load data
 df = pd.read_csv(DATA)
