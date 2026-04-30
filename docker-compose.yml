@@ -7,19 +7,13 @@ services:
       - "11434:11434"
     volumes:
       - ollama_data:/root/.ollama
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:11434"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
 
   ollama-setup:
     image: ollama/ollama
     container_name: hou53-ollama-setup
     depends_on:
-      ollama:
-        condition: service_healthy
-    entrypoint: ["/bin/sh", "-c", "ollama pull llama3.2:3b"]
+      - ollama
+    entrypoint: ["/bin/sh", "-c", "sleep 10 && ollama pull llama3.2:3b"]
     environment:
       - OLLAMA_HOST=http://ollama:11434
     restart: "no"
@@ -36,15 +30,12 @@ services:
       - LLM_MODEL=llama3.2:3b
       - LLM_TIMEOUT=60
     depends_on:
-      ollama:
-        condition: service_healthy
+      - ollama
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-      args:
-        - VITE_API_URL=http://localhost:8000
     container_name: hou53-frontend
     ports:
       - "3000:80"
