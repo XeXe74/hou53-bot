@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 # LLM settings read from environment so the same image works locally and in prod
 LLM_URL = os.getenv("LLM_URL", "http://localhost:11434/api/generate")
-LLM_MODEL = os.getenv("LLM_MODEL", "llama3.2")
+LLM_MODEL = os.getenv("LLM_MODEL", "llama3.2:3b")
 LLM_TIMEOUT = float(os.getenv("LLM_TIMEOUT", "60"))
 
 # System prompt that instructs the LLM to extract house features as JSON
@@ -28,9 +28,9 @@ EXTRACTION_PROMPT = """
 You are a real estate data assistant. Your only task is to extract house
 features from the user description and return them as a valid JSON object.
 
-Only include features that are explicitly mentioned or can be clearly inferred
-from the description. Use the exact field names listed below. Do not add any
-explanation or text outside the JSON object.
+Only include features that are EXPLICITLY mentioned in the description.
+Do NOT infer, assume, or invent any values. If a feature is not mentioned, omit it entirely.
+Use the exact field names listed below. Do not add any explanation or text outside the JSON object.
 
 Key fields to extract (all optional):
 - OverallQual (int 1-10): overall material and finish quality
@@ -203,6 +203,7 @@ async def predict_price(request: PredictRequest):
 
     # Step one: extract structured features from the natural language input
     extracted = await extract_features_with_llm(request.description)
+    extracted = {k: v for k, v in extracted.items() if v not in (0, None, "", "None")}
     logger.info("Extracted features: %s", extracted)
 
     # Step two: run inference (missing fields filled with dataset modes)
