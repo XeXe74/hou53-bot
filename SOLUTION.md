@@ -50,7 +50,7 @@ Lasso's linear nature also makes it compatible with SHAP (SHapley Additive exPla
 
 ### Explainability
 
-Model explainability is provided via **SHAP values**, computed using a `LinearExplainer` matched to the Lasso model. For each prediction, the top contributing features are returned alongside their SHAP importance scores. These are displayed in the frontend in a user-friendly format, showing non-technical users which aspects of the house most influenced the estimated price.
+Model explainability is provided via **Lasso coefficient magnitudes**. Because the model is linear and trained on a standardised feature matrix, the absolute value of each coefficient directly reflects how much that feature influences the predicted price. For each prediction, the five features with the largest absolute coefficients are returned alongside their importance scores. These are displayed in the frontend in a user-friendly format, showing non-technical users which aspects of the house most influenced the estimated price.
 
 ### API Design
 
